@@ -14,13 +14,6 @@ class ProductListCreate(APIView):
 
     def get(self, request):
         products = Product.objects.all()
-        
-        if not products.exists():
-            return Response(
-                {"message": "No products found"},
-                status=status.HTTP_404_NOT_FOUND
-            )
-        
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
     
